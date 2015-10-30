@@ -17,28 +17,49 @@
        //THIS IS A CHANGE TO MY FILE
      ?>
      
+
 	<div id="primary" class="content-area"
 	
 		<main id="main" class="site-main" role="main">
 
 		<?php if ( have_posts() ) : ?>
 
-			<?php if ( is_home() && ! is_front_page() ) : ?>
+		   <?php if ( is_home() && ! is_front_page() ) : ?>
 				<header>
 					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 				</header>
-			<?php endif; ?>
+		   <?php endif; ?>
 
 			
-			 <?php /* The First Loop */ ?>            
+	     <?php /* The First Loop */ ?>
              
-			<?php while ( have_posts() ) : the_post(); ?>
+			 <?php while ( have_posts() ) : the_post(); ?>
                   <?php if ($post->ID == $do_not_duplicate) continue;?>
-             
-					<?php get_template_part( 'template-parts/content', ('Helloworld!') ); ?> 
+				  <?php get_template_part( 'template-parts/content', ('Helloworld!') ); ?>
 
 	         <?php endwhile; ?>
+
+	           <?php rewind_posts(); ?>
+
+               <?php
+
+				$args = array( "post_type" => "portfolio_item", "posts_per_page" => 10 );
+				$loop = new WP_Query( $args );
+				while ( $loop->have_posts() ) : $loop->the_post();
+
+				the_title();
+				echo "<div class="entry-content">";
+				the_content();
+				echo ‘</div>’;
+
+				endwhile;
+
+             ?>
+
+
+
 	     <?php endif; ?>
+
 
 		
 		</main><!-- #main -->

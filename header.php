@@ -10,6 +10,7 @@
  */
 
 ?><!DOCTYPE HTML>
+
 <html>
 <head>
   <title>Henryetta Portfolio</title>
